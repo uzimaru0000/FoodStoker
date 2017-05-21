@@ -8,20 +8,25 @@
         <div id="app">
             <header>
                 <h1>{{ appName }}</h1>
-                <div class="action_button" v-on:click="ripple">
+                <div class="action_button" v-on:click.capture="ripple">
                     <span>+</span>
                 </div>
             </header>
             <section>
-                <div v-for="date in dates" class="item">
-                    <span>☓</span>
+                <div v-for="(date, index) in dates" class="item">
+                    <span v-on:click="removeList(index, $event)">☓</span>
                     <span>{{ date.name }}</span>
                     <span>{{ date.deadLine }}</span>
                 </div>
             </section>
             <div class="overlay" v-bind:class="{show: buttonFlag, hide: !buttonFlag}" v-on:click="modalOff">
                 <div class="modalWindow" v-on:click.stop>
-                    <input type="text" v-model="name">
+                    <div class="action_button" v-on:click="modalOff">
+                        <span>☓</span>
+                    </div>
+                    <input type="text" v-model="foodName">
+                    <input type="date" v-bind:value="nowDate" v-model="deadLine">
+                    <input type="button" value="Add" v-on:click.capture="addList">
                 </div>
             </div>
         </div>

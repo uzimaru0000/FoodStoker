@@ -1,13 +1,15 @@
 'use strict'
 
+let date = new Date();
+
 const app = new Vue({
     el: "#app",
     data: {
         appName: "FoodStoker",
-        dates: [
-                  
-        ],
-        buttonFlag: false
+        dates: [],
+        buttonFlag: false,
+        foodName: '',
+        deadLine: date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + (date.getDate()+1)).slice(-2)
     },
     methods: {
         ripple: function(e) {
@@ -26,6 +28,27 @@ const app = new Vue({
         },
         modalOff: function(e) {
             this.buttonFlag = !this.buttonFlag;
+            this.foodName = '';
+            this.deadLine = date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + (date.getDate()+1)).slice(-2);
+        },
+        addList: function() {
+            let date = {
+                name: this.foodName,
+                deadLine: this.deadLine,
+                flag: true
+            };
+            this.dates.push(date);
+            this.modalOff();
+        },
+        removeList: function(index, e) {
+            // this.dates[index].flag = false;
+            // e.target.parentNode.addEventListener("webkitAnimationEnd", () => this.dates.splice(index, 1));
+            this.dates.splice(index, 1)
+        }
+    },
+    computed: {
+        nowDate: function() {
+            return date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + (date.getDate()+1)).slice(-2);
         }
     }
 });

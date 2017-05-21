@@ -38,12 +38,8 @@ div.action_button {
     display: -webkit-box;
     position: relative;
     overflow: hidden;
-    width: 48px;
-    height: 48px;
-    font-size: 32px;
     text-align: center;
     color: white;
-    background-color: var(--accent-color);
     border-radius: 50%;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     -webkit-box-align: center;
@@ -53,7 +49,7 @@ div.action_button {
 div.action_button span {
     display: block;
     margin: 0 auto;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 div.action_button div.ripple {
     position: absolute;
@@ -74,6 +70,10 @@ div.action_button div.ripple {
 
 header div.action_button {
     position: absolute;
+    width: 48px;
+    height: 48px;
+    font-size: 32px;
+    background-color: var(--accent-color);
     bottom: -16px;
     right: 5%;
 }
@@ -107,10 +107,16 @@ section .item {
     justify-content: space-around;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.5);
 }
+section .item.show {
+    animation: show 500ms ease;
+}
+section .item.hide {
+    animation: hide 500ms ease;
+}
 
 section .item span:nth-child(1) {
     display: block;
-    /*text-align: left;*/
+    text-align: left;
     width: 0;
     color: var(--secondary-text-color);
     font-size: 24px;
@@ -125,6 +131,22 @@ section .item span:nth-child(3) {
     text-align: right;
     color: var(--secondary-text-color);
 }
+@keyframes show {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+@keyframes hide {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(0);
+    }
+}
 
 .modalWindow {
     position: fixed;
@@ -137,25 +159,47 @@ section .item span:nth-child(3) {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .overlay {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: #eee;
-    opacity: 0.5;
+    background: rgba(100, 100, 100, 0.3);
+    opacity: 0;
     top: 0;
     left: 0;
     z-index: 150;
-    transform: scale(0);
+    transform: scale(0.3);
 }
 .overlay.show {
-    transition: transform 300ms ease;
-    transform: scale(1.0);
+    transition: all 300ms ease;
+    transform: scale(1);
+    opacity: 1;
 }
 .overlay.hide {
-    transition: transform 300ms ease;
-    transform: scale(0);
+    transition: all 300ms ease;
+    transform: scale(0.3);
+    opacity: 0;
+}
+.modalWindow div.action_button {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    color: var(--text-primary-color);
+    background-color: var(--base-color);
+}
+.modalWindow * {
+    margin: 5px 0;
+}
+.modalWindow input {
+    height: 32px;
+    font-size: 24px;
+    text-align: center;
 }
 
 @keyframes clicked {

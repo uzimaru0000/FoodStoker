@@ -5,12 +5,12 @@ const app = new Vue({
     data: {
         appName: "FoodStoker",
         dates: [
-            
+                  
         ],
         buttonFlag: false
     },
     methods: {
-        addList: function(e) {
+        ripple: function(e) {
             let rect = e.target.getBoundingClientRect();
             let span = document.createElement('div');
             span.setAttribute('class', 'ripple');
@@ -22,6 +22,10 @@ const app = new Vue({
             span.addEventListener('webkitAnimationEnd', () => {
                 e.target.removeChild(span);
             });
+            this.buttonFlag = !this.buttonFlag;
+        },
+        modalOff: function(e) {
+            this.buttonFlag = !this.buttonFlag;
         }
     }
 });

@@ -8,7 +8,7 @@
         <div id="app">
             <header>
                 <h1>{{ appName }}</h1>
-                <div class="action_button" v-on:click="addList">
+                <div class="action_button" v-on:click="ripple">
                     <span>+</span>
                 </div>
             </header>
@@ -19,6 +19,11 @@
                     <span>{{ date.deadLine }}</span>
                 </div>
             </section>
+            <div class="overlay" v-bind:class="{show: buttonFlag, hide: !buttonFlag}" v-on:click="modalOff">
+                <div class="modalWindow" v-on:click.stop>
+                    <input type="text" v-model="name">
+                </div>
+            </div>
         </div>
         
         <script src="./node_modules/vue/dist/vue.min.js"></script>

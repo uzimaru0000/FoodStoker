@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="app">
+            <header>
+                <h1>{{ appName }}</h1>
+                <div class="action_button"><span>+</span></div>
+            </header>
+            <section>
+                <div v-for="date in dates" class="item">
+                    <span>☓</span>
+                    <span>{{ date.name }}</span>
+                    <span>{{ date.deadLine }}</span>
+                </div>
+            </section>
+        </div>
+        
+        <script src="./node_modules/vue/dist/vue.min.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

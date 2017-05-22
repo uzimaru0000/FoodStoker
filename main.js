@@ -1,15 +1,16 @@
 'use strict'
 
 let date = new Date();
+let storage = localStorage;
 
 const app = new Vue({
     el: "#app",
     data: {
         appName: "FoodStoker",
-        dates: [],
+        dates: JSON.parse(storage.getItem('datas')).date,
         buttonFlag: false,
         foodName: '',
-        deadLine: date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + (date.getDate()+1)).slice(-2)
+        deadLine: date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + (date.getDate())).slice(-2)
     },
     methods: {
         ripple: function(e) {
@@ -39,11 +40,13 @@ const app = new Vue({
             };
             this.dates.push(date);
             this.modalOff();
+            localStorage.setItem('datas', JSON.stringify({date: this.dates}));
         },
         removeList: function(index, e) {
             // this.dates[index].flag = false;
             // e.target.parentNode.addEventListener("webkitAnimationEnd", () => this.dates.splice(index, 1));
-            this.dates.splice(index, 1)
+            this.dates.splice(index, 1);
+            localStorage.setItem('datas', JSON.stringify({date: this.dates}));
         }
     },
     computed: {
